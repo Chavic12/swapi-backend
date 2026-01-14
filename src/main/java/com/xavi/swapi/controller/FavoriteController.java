@@ -23,13 +23,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/favorites")
 @RequiredArgsConstructor
-@Tag(name = "Favorites", description = "Endpoints para gestionar favoritos del usuario")
+@Tag(name = "Favorites", description = "Gestionar favoritos de recursos: PEOPLE, FILMS, STARSHIPS, VEHICLES")
 @SecurityRequirement(name = "Bearer Authentication")
 public class FavoriteController {
 
     private final FavoriteService favoriteService;
 
-    @Operation(summary = "Agregar favorito", description = "Agrega un recurso de Star Wars a los favoritos del usuario")
+    @Operation(summary = "Agregar favorito", description = "Agrega un recurso a favoritos. Tipos: PEOPLE, FILMS, STARSHIPS, VEHICLES")
     @ApiResponse(responseCode = "201", description = "Favorito agregado exitosamente")
     @ApiResponse(responseCode = "409", description = "El recurso ya esta en favoritos")
     @PostMapping
@@ -40,12 +40,12 @@ public class FavoriteController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @Operation(summary = "Listar favoritos", description = "Obtiene la lista de favoritos del usuario con filtro opcional por tipo")
+    @Operation(summary = "Listar favoritos", description = "Lista favoritos del usuario. Filtro opcional: PEOPLE, FILMS, STARSHIPS, VEHICLES")
     @ApiResponse(responseCode = "200", description = "Lista de favoritos obtenida exitosamente")
     @GetMapping
     public ResponseEntity<List<FavoriteResponse>> getFavorites(
             @AuthenticationPrincipal User user,
-            @Parameter(description = "Filtrar por tipo de recurso") @RequestParam(required = false) ResourceType type) {
+            @Parameter(description = "Filtrar por tipo: PEOPLE, FILMS, STARSHIPS, VEHICLES") @RequestParam(required = false) ResourceType type) {
         return ResponseEntity.ok(favoriteService.getFavorites(user, type));
     }
 
@@ -65,7 +65,7 @@ public class FavoriteController {
     @GetMapping("/check")
     public ResponseEntity<Boolean> checkFavorite(
             @AuthenticationPrincipal User user,
-            @Parameter(description = "Tipo de recurso") @RequestParam ResourceType type,
+            @Parameter(description = "Tipo: PEOPLE, FILMS, STARSHIPS, VEHICLES") @RequestParam ResourceType type,
             @Parameter(description = "ID del recurso") @RequestParam String resourceId) {
         return ResponseEntity.ok(favoriteService.isFavorite(user, type, resourceId));
     }
