@@ -2,7 +2,6 @@
 
 API REST que proporciona acceso a datos de Star Wars desde SWAPI (Star Wars API) con autenticacion JWT.
 
-## 🌐 Aplicacion en Vivo
 
 <div align="center">
 
@@ -145,6 +144,39 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9...
 |--------|---------------|-----|
 | `dev` | H2 (memoria) | Desarrollo local |
 | `prod` | PostgreSQL | Produccion |
+
+## 🧪 Pruebas
+
+### Ejecutar Pruebas
+
+```bash
+# Ejecutar todas las pruebas
+./mvnw test
+
+# Ejecutar con detalles
+./mvnw test -Dtest=*Test
+
+# Ejecutar una prueba especifica
+./mvnw test -Dtest=AuthControllerTest
+```
+
+### Estructura de Pruebas
+
+```
+src/test/java/com/xavi/swapi/
+├── controller/     # Pruebas de integracion de controladores
+├── service/        # Pruebas unitarias de servicios
+└── security/       # Pruebas de seguridad y JWT
+```
+
+### Tecnologias de Testing
+
+| Herramienta | Uso |
+|-------------|-----|
+| **JUnit 5** | Framework de pruebas |
+| **MockMvc** | Pruebas de controladores REST |
+| **WireMock** | Mock de API externa (SWAPI) |
+| **H2** | Base de datos en memoria para pruebas |
 
 ## 📦 Despliegue en Heroku
 
