@@ -18,10 +18,12 @@ public class OpenApiConfig {
                 .info(new Info()
                         .title("SWAPI Backend API")
                         .version("1.0.0")
-                        .description("API de autenticación JWT con Spring Boot")
+                        .description("API REST que proporciona acceso a datos de Star Wars (People, Films, Starships y Vehicles) " +
+                                "desde SWAPI (Star Wars API). Incluye autenticacion JWT con access y refresh tokens, " +
+                                "registro e inicio de sesion. Desarrollado con Spring Boot, Spring Security y PostgreSQL.")
                         .contact(new Contact()
-                                .name("Xavi")
-                                .email("xavi@ejemplo.com")))
+                                .name("Xavier Chavez")
+                                .email("xavierchavez916@gmail.com")))
                 .addSecurityItem(new SecurityRequirement().addList("Bearer Authentication"))
                 .components(new Components()
                         .addSecuritySchemes("Bearer Authentication",
