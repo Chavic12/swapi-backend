@@ -1,10 +1,52 @@
-HELP.md
+##################################
+# Maven / Spring Boot
+##################################
 target/
-.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
+build/
+out/
+*.jar
+*.war
+*.ear
 
-### STS ###
+##################################
+# Wrapper
+##################################
+.mvn/wrapper/maven-wrapper.jar
+
+##################################
+# Application secrets
+##################################
+.env
+*.env
+
+##################################
+# Docs & exports
+##################################
+/docs
+docs/
+*.pdf
+*.docx
+*.xlsx
+*.pptx
+*.dump
+*.zip
+
+##################################
+# Logs
+##################################
+*.log
+logs/
+*.tmp
+
+##################################
+# OS
+##################################
+.DS_Store
+Thumbs.db
+
+##################################
+# Spring Tool Suite (STS)
+##################################
 .apt_generated
 .classpath
 .factorypath
@@ -13,21 +55,32 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+##################################
+# IntelliJ IDEA
+##################################
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+##################################
+# VS Code
+##################################
+.vscode/
+
+##################################
+# NetBeans
+##################################
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
+
+##################################
+# Allow build folders inside src
+##################################
+!**/src/main/**/target/
+!**/src/test/**/target/
 !**/src/main/**/build/
 !**/src/test/**/build/
-
-### VS Code ###
-.vscode/
