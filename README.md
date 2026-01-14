@@ -56,6 +56,7 @@ src/main/java/com/xavi/swapi/
 | ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-4169E1?style=flat&logo=postgresql&logoColor=white) | Base de datos produccion |
 | ![H2](https://img.shields.io/badge/H2-Database-0000BB?style=flat&logo=databricks&logoColor=white) | Base de datos desarrollo |
 | ![Swagger](https://img.shields.io/badge/Swagger-OpenAPI-85EA2D?style=flat&logo=swagger&logoColor=black) | Documentacion API |
+| ![Docker](https://img.shields.io/badge/Docker-Container-2496ED?style=flat&logo=docker&logoColor=white) | Containerizacion |
 
 ## 📡 Endpoints de la API
 
@@ -81,6 +82,54 @@ src/main/java/com/xavi/swapi/
 | `GET` | `/api/starships/{id}` | Detalle de nave estelar |
 | `GET` | `/api/vehicles` | Listar vehiculos |
 | `GET` | `/api/vehicles/{id}` | Detalle de vehiculo |
+
+### Favoritos
+
+> Requieren autenticacion JWT
+
+| Metodo | Endpoint | Descripcion |
+|--------|----------|-------------|
+| `POST` | `/api/favorites` | Agregar a favoritos |
+| `GET` | `/api/favorites` | Listar favoritos del usuario |
+| `GET` | `/api/favorites/check` | Verificar si recurso es favorito |
+| `DELETE` | `/api/favorites/{id}` | Eliminar de favoritos |
+
+#### Ejemplo de uso de Favoritos
+
+**Agregar favorito:**
+```json
+POST /api/favorites
+{
+  "resourceType": "PEOPLE",
+  "resourceId": "1"
+}
+```
+
+**Tipos de recursos:** `PEOPLE`, `FILMS`, `STARSHIPS`, `VEHICLES`
+
+**Listar favoritos (incluye detalle del recurso):**
+```
+GET /api/favorites?type=PEOPLE
+```
+
+**Respuesta:**
+```json
+[
+  {
+    "id": 1,
+    "resourceType": "PEOPLE",
+    "resourceId": "1",
+    "createdAt": "2026-01-14T13:30:24",
+    "resource": {
+      "uid": "1",
+      "name": "Luke Skywalker",
+      "gender": "male",
+      "height": "172",
+      ...
+    }
+  }
+]
+```
 
 ### 🔍 Parametros de Consulta
 
@@ -197,6 +246,31 @@ git push heroku main
 # Ver logs
 heroku logs --tail -a nombre-app
 ```
+
+## 🐳 Docker
+
+### Construir imagen
+
+```bash
+docker build -t swapi-backend .
+```
+
+### Ejecutar contenedor
+
+```bash
+# Modo desarrollo (H2)
+docker run -p 8080:8080 swapi-backend
+
+# Modo produccion (PostgreSQL)
+docker run -p 8080:8080 \
+  -e SPRING_PROFILES_ACTIVE=prod \
+  -e DB_URL=jdbc:postgresql://host:5432/db \
+  -e DB_USERNAME=usuario \
+  -e DB_PASSWORD=password \
+  -e JWT_SECRET=clave_secreta \
+  swapi-backend
+```
+
 
 ## 👨‍💻 Autor
 
